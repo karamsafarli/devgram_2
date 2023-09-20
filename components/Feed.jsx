@@ -4,9 +4,9 @@ import PostCard from './PostCard';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchPosts } from '@redux/features/postslice';
 import { useSession } from 'next-auth/react';
-const Feed = () => {
+const Feed = ({ data }) => {
 
-  const [posts, setPosts] = useState([]);
+  // const [posts, setPosts] = useState([]);
   const dispatch = useDispatch();
   const darkmode = useSelector((state) => state.colorThemeReducer.value);
   const allPosts = useSelector((state) => state.posts.data)
@@ -14,23 +14,23 @@ const Feed = () => {
 
 
 
-  const fetchPosts = async () => {
-    // const res = await fetch('/api/post', { cache: 'no-cache' });
-    // const data = await res.json();
+  // const fetchPosts = async () => {
+  //   // const res = await fetch('/api/post', { cache: 'no-cache' });
+  //   // const data = await res.json();
 
-    try {
-      const res = await fetch('/api/post', {cache: 'no-store'});
-      const data = await res.json()
-      setPosts(data)
-    } catch (error) {
-      console.log(error)
-    }
-  }
+  //   try {
+  //     const res = await fetch('/api/post', { cache: 'no-store' });
+  //     const data = await res.json()
+  //     setPosts(data)
+  //   } catch (error) {
+  //     console.log(error)
+  //   }
+  // }
 
-  useEffect(() => {
-    // dispatch(fetchPosts())
-    fetchPosts()
-  }, [])
+  // useEffect(() => {
+  //   // dispatch(fetchPosts())
+  //   fetchPosts()
+  // }, [])
 
 
 
@@ -99,7 +99,7 @@ const Feed = () => {
         style={{ backgroundColor: darkmode ? '#1D2226' : 'white' }}
       />
       {
-        posts?.filter((post) => {
+        data?.filter((post) => {
           return (
             post.text.toLowerCase().includes(search.toLowerCase()) ||
             handleHashtags(post.tag).toLowerCase().includes(search.toLowerCase()) ||
