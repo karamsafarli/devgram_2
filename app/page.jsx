@@ -1,33 +1,22 @@
 "use client"
-
-import Feed from "@components/Feed";
-import { useState, useEffect } from 'react';
+import Feed from "@components/Feed"
+import { useEffect,useState } from "react";
 
 const Home = () => {
-    const [posts, setPosts] = useState([]);
-
-    const fetchPosts = async () => {
-        // const res = await fetch('/api/post', { cache: 'no-cache' });
-        // const data = await res.json();
-
-        try {
-            const res = await fetch('/api/post', { cache: 'no-store' });
-            const data = await res.json()
-            setPosts(data)
-        } catch (error) {
-            console.log(error)
-        }
-    }
+    const [mounted, setMounted] = useState(false);
 
     useEffect(() => {
-        // dispatch(fetchPosts())
-        fetchPosts()
+        setMounted(true)
     }, [])
+
+    if (!mounted) {
+        return null;
+    }
 
     return (
         <main>
             <h1 className="header_text">Connect with developers around the world and showcase your coding skills - welcome to Devgram!</h1>
-            <Feed data={posts}/>
+            <Feed />
         </main>
     )
 }
