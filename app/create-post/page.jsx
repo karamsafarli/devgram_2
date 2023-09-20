@@ -39,7 +39,7 @@ const CreatePost = () => {
 
       if (res.ok) {
         // dispatch(fetchPosts())
-        router.push('/');
+        router.push('/feed');
       }
     } catch (err) {
       console.log(err);
