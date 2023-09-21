@@ -5,15 +5,11 @@ import { useSelector } from 'react-redux';
 import FileBase from 'react-file-base64';
 import { CldUploadButton } from 'next-cloudinary';
 import { X } from "lucide-react";
-import { useEffect } from "react";
 
 const Form = ({ type, post, setPost, submitting, handleSubmit }) => {
 
   const darkmode = useSelector((state) => state.colorThemeReducer.value);
-  // useEffect(() => {
-  //   console.log(post.imageUrl)
-  // }, [post.imageUrl])
-  
+
 
   return (
     <section className='make_post'>

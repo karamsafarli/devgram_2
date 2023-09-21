@@ -2,6 +2,9 @@
 import Feed from "@components/Feed"
 import { useEffect, useState } from "react";
 
+
+
+
 const Home = () => {
     const [mounted, setMounted] = useState(false);
 
