@@ -6,6 +6,7 @@ import Form from '@components/Form';
 import { fetchPosts } from '@redux/features/postslice';
 import { useDispatch } from 'react-redux';
 
+
 const CreatePost = () => {
 
   const [submitting, setSubmitting] = useState(false);
@@ -20,8 +21,8 @@ const CreatePost = () => {
   const { data: session } = useSession();
 
   const makePost = async (e) => {
-    if (!session.user) return redirect('/');
     e.preventDefault();
+    if (!session.user) return redirect('/');
 
     setSubmitting(true);
 

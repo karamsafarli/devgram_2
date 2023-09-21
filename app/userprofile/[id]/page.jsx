@@ -61,7 +61,7 @@ const UserProfiles = ({ params }) => {
         const res = await fetch(`/api/users/${params.id}/follower`);
         const data = await res.json()
         setUser(data)
-
+        
     }
 
     const [posts, setPosts] = useState([]);
@@ -73,10 +73,7 @@ const UserProfiles = ({ params }) => {
     return (
         <Profile
             name={
-                posts.length > 0 &&
-                (
-                    `${capitalize(posts[0].author.username)}'s`
-                )
+               `${user?.username}'s`
             }
             data={posts}
             handleLikes={handleLikes}

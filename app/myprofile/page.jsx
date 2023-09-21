@@ -25,17 +25,16 @@ const ProfilePage = () => {
     const res = await fetch(`/api/users/${session?.user.id}/follower`);
     const data = await res.json()
     setUser(data)
-
   }
 
   useEffect(() => {
 
-    if (session?.user.id) {
+    if (session?.user) {
       fetchPosts();
       fetchFollowers();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [session?.user.id]);
+  }, [session?.user]);
 
 
 
@@ -93,7 +92,8 @@ const ProfilePage = () => {
       });
 
       if (res.ok) {
-        fetchPosts()
+        fetchPosts();
+        fetchFollowers()
       }
 
     } catch (error) {

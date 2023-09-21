@@ -9,6 +9,7 @@ import Link from 'next/link';
 import { AiOutlineSend } from 'react-icons/ai';
 import { BsChat, BsHeart, BsHeartFill } from 'react-icons/bs';
 import CommentComponent from './CommentComponent';
+import { useRouter } from 'next/navigation';
 
 
 const capitalize = (name) => {
@@ -31,7 +32,8 @@ const PostCard = ({ post, handleTagClick, handleEdit, handleDelete, handleLikes,
     const [inputComment, setInputComment] = useState('');
     const [comment, setComment] = useState([]);
     const [postIsLiked, setPostIsLiked] = useState(null);
-    const [isFollowing, setIsFollowing] = useState(null)
+    const [isFollowing, setIsFollowing] = useState(null);
+    const router = useRouter();
 
     const handleCopy = () => {
         setCopied(post.text);
@@ -82,7 +84,7 @@ const PostCard = ({ post, handleTagClick, handleEdit, handleDelete, handleLikes,
     }
 
 
-    const checkHandlePostLikes = (e) => {
+    const checkHandlePostLikes = async (e) => {
         e.preventDefault();
         if (!session?.user) return alert('You should sign in before liking posts.');
 

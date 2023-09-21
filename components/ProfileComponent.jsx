@@ -48,14 +48,14 @@ const Profile = ({ name, desc, data, handleEdit, handleDelete, handleFollow, han
 
   return (
     <div className="profile">
-      <h1 className="header">{name} Profile</h1>
+      <h1 className="header capitalize">{name} Profile</h1>
       <p className="descript">{desc}</p>
 
       <div className="tab_container" style={{ backgroundColor: darkmode ? 'black' : '#f3f2ef' }}>
         <div className="tabs">
-          <span onClick={() => setTabIndex(0)} style={{ color: tabIndex !== 0 ? 'rgba(128, 128, 128, 0.6)' : '' }}>Posts</span>
-          <span onClick={() => setTabIndex(1)} style={{ color: tabIndex !== 1 ? 'rgba(128, 128, 128, 0.6)' : '' }}>{ } Followers</span>
-          <span onClick={() => setTabIndex(2)} style={{ color: tabIndex !== 2 ? 'rgba(128, 128, 128, 0.6)' : '' }}>Following</span>
+          <span onClick={() => setTabIndex(0)} style={{ color: tabIndex !== 0 ? 'rgba(128, 128, 128, 0.6)' : '' }}>{data?.length} Posts</span>
+          <span onClick={() => setTabIndex(1)} style={{ color: tabIndex !== 1 ? 'rgba(128, 128, 128, 0.6)' : '' }}>{followers?.length} Followers</span>
+          <span onClick={() => setTabIndex(2)} style={{ color: tabIndex !== 2 ? 'rgba(128, 128, 128, 0.6)' : '' }}>{following?.length} Following</span>
         </div>
         <div className="bottom_line" style={{ left: `${tabIndex * 33.33}%`, backgroundColor: darkmode ? 'white' : 'black' }}></div>
       </div>
@@ -76,25 +76,29 @@ const Profile = ({ name, desc, data, handleEdit, handleDelete, handleFollow, han
 
               <div className="user_posts">
                 {
-                  data
-                    .filter((el) => {
-                      return (
-                        el.text.toLowerCase().includes(search) ||
-                        handleHashtags(el.tag).toLowerCase().includes(search) ||
-                        el.author.username.toLowerCase().includes(search)
-                      )
-                    })
-                    .map((post) => (
-                      <PostCard
-                        key={post._id}
-                        post={post}
-                        handleDelete={() => handleDelete && handleDelete(post)}
-                        handleEdit={() => handleEdit && handleEdit(post)}
-                        handleTagClick={handleTagClick}
-                        handleFollow={handleFollow}
-                        handleLikes={handleLikes}
-                      />
-                    ))
+                  data?.length > 0 ? (
+                    data
+                      .filter((el) => {
+                        return (
+                          el.text.toLowerCase().includes(search) ||
+                          handleHashtags(el.tag).toLowerCase().includes(search) ||
+                          el.author.username.toLowerCase().includes(search)
+                        )
+                      })
+                      .map((post) => (
+                        <PostCard
+                          key={post._id}
+                          post={post}
+                          handleDelete={() => handleDelete && handleDelete(post)}
+                          handleEdit={() => handleEdit && handleEdit(post)}
+                          handleTagClick={handleTagClick}
+                          handleFollow={handleFollow}
+                          handleLikes={handleLikes}
+                        />
+                      ))
+                  ) : (
+                    <h6 className="text-xl">No posts yet</h6>
+                  )
                 }
               </div>
             </div>

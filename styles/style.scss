@@ -165,13 +165,36 @@ html {
 
 .make_post {
   margin-top: 10px;
-  max-width: 1000px;
+  padding: 20px 0;
+  // max-width: 1000px;
 
 
 
   form {
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
+
+    @media (max-width: 768px) {
+      flex-direction: column;
+    }
+
+    .form_left {
+      display: flex;
+      flex-direction: column;
+      width: 58%;
+
+      @media (max-width: 768px) {
+        width: 100%;
+      }
+    }
+
+    .form_right {
+      width: 37%;
+      @media (max-width: 768px) {
+        width: 100%;
+        margin-top: 20px;
+      }
+    }
 
     label {
       font-size: 15px;
@@ -190,7 +213,7 @@ html {
       border-radius: 10px;
       outline: none;
       padding: 15px;
-      font-family: 'Source Code Pro', monospace;
+      // font-family: 'Source Code Pro', monospace;
     }
 
     input {
