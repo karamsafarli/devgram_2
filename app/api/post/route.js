@@ -7,12 +7,7 @@ export const GET = async () => {
         await connectToDB();
         const allPosts = await Post.find().sort({ createdAt: -1 }).populate('author');
 
-        return NextResponse.json(allPosts, {
-            headers: {
-                'Cache-Control': 'no-store',
-                'Pragma': 'no-cache'
-            }
-        })
+        return NextResponse.json(allPosts)
 
     } catch (err) {
         return new Response("Posts not found", { status: 500 })

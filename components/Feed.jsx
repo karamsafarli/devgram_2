@@ -22,10 +22,7 @@ const Feed = () => {
       setIsLoading(true);
       const res = await fetch('/api/post',
         {
-          headers: {
-            'Cache-Control': 'no-store',
-            'Pragma': 'no-cache'
-          }
+          cache: 'no-store'
         }
       );
       const data = await res.json()
