@@ -11,7 +11,7 @@ const Feed = () => {
   const darkmode = useSelector((state) => state.colorThemeReducer.value);
   const allPosts = useSelector((state) => state.posts.data)
   const { data: session } = useSession();
-
+  const [isLoading, setIsLoading] = useState(false);
 
 
   const fetchPosts = async () => {
@@ -19,6 +19,7 @@ const Feed = () => {
     // const data = await res.json();
 
     try {
+      setIsLoading(true);
       const res = await fetch('/api/post',
         {
           headers: {
@@ -31,6 +32,8 @@ const Feed = () => {
       setPosts(data)
     } catch (error) {
       console.log(error)
+    } finally {
+      setIsLoading(false)
     }
   }
 
@@ -106,26 +109,30 @@ const Feed = () => {
         style={{ backgroundColor: darkmode ? '#1D2226' : 'white' }}
       />
       {
-        posts?.length > 0 ? (
-          posts?.filter((post) => {
-            return (
-              post.text.toLowerCase().includes(search.toLowerCase()) ||
-              handleHashtags(post.tag).toLowerCase().includes(search.toLowerCase()) ||
-              post.author.username.toLowerCase().includes(search.toLowerCase())
-            )
-          })
-            .map((el) => (
-              <PostCard
-                key={el._id}
-                post={el}
-                handleTagClick={handleTagClick}
-                handleLikes={handleLikes}
-                handleFollow={handleFollow}
-              />
-            ))
-        ) : (<h1 className='text-2xl text-center'>
-          No posts yet
-        </h1>
+        isLoading ? (
+          <div>Loading...</div>
+        ) : (
+          posts?.length > 0 ? (
+            posts?.filter((post) => {
+              return (
+                post.text.toLowerCase().includes(search.toLowerCase()) ||
+                handleHashtags(post.tag).toLowerCase().includes(search.toLowerCase()) ||
+                post.author.username.toLowerCase().includes(search.toLowerCase())
+              )
+            })
+              .map((el) => (
+                <PostCard
+                  key={el._id}
+                  post={el}
+                  handleTagClick={handleTagClick}
+                  handleLikes={handleLikes}
+                  handleFollow={handleFollow}
+                />
+              ))
+          ) : (<h1 className='text-2xl text-center'>
+            No posts yet
+          </h1>
+          )
         )
       }
     </section>
