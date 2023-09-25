@@ -10,7 +10,6 @@ import { AiOutlineSend } from 'react-icons/ai';
 import { BsChat, BsHeart, BsHeartFill } from 'react-icons/bs';
 import CommentComponent from './CommentComponent';
 import { useRouter } from 'next/navigation';
-import { getSession } from '@hooks/getSession';
 
 
 const capitalize = (name) => {
@@ -25,8 +24,7 @@ const capitalize = (name) => {
 
 const PostCard = ({ post, handleTagClick, handleEdit, handleDelete, handleLikes, handleFollow }) => {
 
-    // const { data: session } = useSession();
-    const session = getSession();
+    const { data: session } = useSession();
     const [copied, setCopied] = useState('');
     const darkmode = useSelector((state) => state.colorThemeReducer.value)
     const pathname = usePathname();
