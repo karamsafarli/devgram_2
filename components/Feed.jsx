@@ -19,7 +19,14 @@ const Feed = () => {
     // const data = await res.json();
 
     try {
-      const res = await fetch('/api/post', { cache: 'no-store' });
+      const res = await fetch('/api/post',
+        {
+          headers: {
+            'Cache-Control': 'no-store',
+            'Pragma': 'no-cache'
+          }
+        }
+      );
       const data = await res.json()
       setPosts(data)
     } catch (error) {
@@ -117,8 +124,8 @@ const Feed = () => {
               />
             ))
         ) : (<h1 className='text-2xl text-center'>
-                No posts yet
-            </h1>
+          No posts yet
+        </h1>
         )
       }
     </section>
