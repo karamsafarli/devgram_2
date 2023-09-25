@@ -21,11 +21,13 @@ const RootLayout = async ({ children }) => {
 
 
     return (
+        <SessionProviders>
             <Providers>
                 <App>
                     {children}
                 </App>
             </Providers>
+        </SessionProviders>
     )
 }
 
