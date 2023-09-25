@@ -3,7 +3,6 @@ import '@styles/style.scss';
 import { Providers } from '@redux/provider';
 import SessionProviders from '@components/Provider';
 import App from '@components/App';
-import { getServerSession } from 'next-auth';
 
 import { v2 as cloudinary } from 'cloudinary';
 
@@ -20,16 +19,13 @@ export const metadata = {
 
 const RootLayout = async ({ children }) => {
 
-    const session = await getServerSession();
 
     return (
-        <SessionProviders session={session}>
             <Providers>
                 <App>
                     {children}
                 </App>
             </Providers>
-        </SessionProviders>
     )
 }
 

@@ -1,6 +1,8 @@
 'use client'
 import Nav from "./Nav";
 import { useSelector } from 'react-redux';
+import SessionProviders from "./Provider";
+
 
 const App = ({ children }) => {
 
@@ -9,10 +11,12 @@ const App = ({ children }) => {
   return (
     <html lang="en">
       <body className="app" style={{ backgroundColor: darkMode ? 'black' : '#F3F2EF', color: darkMode ? 'white' : 'black' }}>
-        <div className="app-container">
-          <Nav />
-          {children}
-        </div>
+        <SessionProviders>
+          <div className="app-container">
+            <Nav />
+            {children}
+          </div>
+        </SessionProviders>
       </body>
     </html>
   )
