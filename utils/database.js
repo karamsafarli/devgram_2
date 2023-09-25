@@ -1,14 +1,14 @@
 import mongoose from "mongoose";
 
-// let isConnected = false;
+let isConnected = false;
 
 export const connectToDB = async () => {
     mongoose.set('strictQuery', true);
 
-    // if (isConnected) {
-    //     console.log('Mongo db is connected');
-    //     return;
-    // }
+    if (isConnected) {
+        console.log('Mongo db is connected');
+        return;
+    }
 
     try {
         await mongoose.connect(process.env.MONGODB_URI.toString(), {
@@ -16,10 +16,8 @@ export const connectToDB = async () => {
             useNewUrlParser: true,
             useUnifiedTopology: true
         })
-        
-        console.log('Mongo db is connected');
 
-        // isConnected = true;
+        isConnected = true;
     } catch (err) {
         console.log(err)
     }
