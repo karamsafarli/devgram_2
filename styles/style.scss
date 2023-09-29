@@ -190,6 +190,7 @@ html {
 
     .form_right {
       width: 37%;
+
       @media (max-width: 768px) {
         width: 100%;
         margin-top: 20px;
@@ -295,6 +296,12 @@ html {
       font-size: 13px;
       font-weight: 500;
     }
+  }
+
+  video {
+    border-radius: 10px;
+    height: auto;
+    width: 100%;
   }
 
   .post_image {

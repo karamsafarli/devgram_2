@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 'use client'
 
 import { useState, useEffect } from 'react';
@@ -229,15 +230,23 @@ const PostCard = ({ post, handleTagClick, handleEdit, handleDelete, handleLikes,
                     />
                 </div> */}
             </div>
-            {/* eslint-disable-next-line @next/next/no-img-element*/}
+
             {
                 post.imageURL && (
                     // eslint-disable-next-line @next/next/no-img-element
-                    <img
-                        src={post.imageURL}
-                        alt="post-image"
-                        className='post_image'
-                    />
+                    post.imageURL.split('.')[3] === "mp4" ? (
+                        <video src={post.imageURL}
+                            controls
+                        >
+
+                        </video>
+                    ) : (
+                        <img
+                            src={post.imageURL}
+                            alt="post-image"
+                            className='post_image'
+                        />
+                    )
                 )
             }
             <div className='card_text'>{post.text}</div>
