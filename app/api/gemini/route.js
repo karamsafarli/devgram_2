@@ -5,6 +5,7 @@ export const POST = async (req, res) => {
     try {
         const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
         const { prompt, imageParts } = await req.json();
+        console.log(prompt)
         // console.log(imageParts)
         const modelName = imageParts.length > 0 ? "gemini-pro-vision" : "gemini-pro"
         const model = genAI.getGenerativeModel({ model: modelName });
