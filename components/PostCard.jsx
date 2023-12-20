@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 'use client'
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { useSession } from 'next-auth/react';
 import { usePathname } from 'next/navigation';
@@ -11,6 +11,7 @@ import { AiOutlineSend } from 'react-icons/ai';
 import { BsChat, BsHeart, BsHeartFill } from 'react-icons/bs';
 import CommentComponent from './CommentComponent';
 import { useRouter } from 'next/navigation';
+import { motion } from 'framer-motion'
 
 
 const capitalize = (name) => {
@@ -35,6 +36,17 @@ const PostCard = ({ post, handleTagClick, handleEdit, handleDelete, handleLikes,
     const [postIsLiked, setPostIsLiked] = useState(null);
     const [isFollowing, setIsFollowing] = useState(null);
     const router = useRouter();
+    // const [playVideo, setPlayVideo] = useState(false);
+    // const videoRef = useRef();
+
+    // useEffect(() => {
+    //     console.log(playVideo)
+    //     if(playVideo) {
+    //         videoRef.current.play();
+    //     } else {
+    //         videoRef?.current?.pause();
+    //     }
+    // }, [playVideo])
 
     const handleCopy = () => {
         setCopied(post.text);
@@ -235,11 +247,12 @@ const PostCard = ({ post, handleTagClick, handleEdit, handleDelete, handleLikes,
                 post.imageURL && (
                     // eslint-disable-next-line @next/next/no-img-element
                     post.imageURL.split('.')[3] === "mp4" ? (
-                        <video src={post.imageURL}
+                        <motion.video
+                            src={post.imageURL}
                             controls
                         >
 
-                        </video>
+                        </motion.video>
                     ) : (
                         <img
                             src={post.imageURL}
